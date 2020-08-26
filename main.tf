@@ -68,8 +68,7 @@ resource "azurerm_network_interface" "catapp-nic" {
   location                  = var.location
   resource_group_name       = azurerm_resource_group.myresourcegroup.name
   network_security_group_id = azurerm_network_security_group.catapp-sg.id
-  billable            = "true"
-  department          = "devops"
+
   ip_configuration {
     name                          = "${var.prefix}ipconfig"
     subnet_id                     = azurerm_subnet.subnet.id
