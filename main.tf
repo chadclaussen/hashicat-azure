@@ -12,8 +12,6 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.myresourcegroup.location
   address_space       = [var.address_space]
   resource_group_name = azurerm_resource_group.myresourcegroup.name
-  Department          = "true"
-  Billable            = "devops"
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -95,6 +93,9 @@ resource "azurerm_virtual_machine" "catapp" {
 
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
+
+  department          = "true"
+  billable            = "devops"
 
   storage_image_reference {
     publisher = var.image_publisher
