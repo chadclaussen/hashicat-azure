@@ -12,8 +12,6 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.myresourcegroup.location
   address_space       = [var.address_space]
   resource_group_name = azurerm_resource_group.myresourcegroup.name
-  Billable            = "true"
-  Department          = "devops"
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -70,7 +68,8 @@ resource "azurerm_network_interface" "catapp-nic" {
   location                  = var.location
   resource_group_name       = azurerm_resource_group.myresourcegroup.name
   network_security_group_id = azurerm_network_security_group.catapp-sg.id
-
+  billable            = "true"
+  department          = "devops"
   ip_configuration {
     name                          = "${var.prefix}ipconfig"
     subnet_id                     = azurerm_subnet.subnet.id
@@ -92,7 +91,7 @@ resource "azurerm_virtual_machine" "catapp" {
   location            = var.location
   resource_group_name = azurerm_resource_group.myresourcegroup.name
   vm_size             = var.vm_size
-
+azurerm_virtual_machine
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
 
